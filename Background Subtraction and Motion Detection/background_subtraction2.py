@@ -4,7 +4,6 @@ import numpy as np
 # Create a VideoCapture object and read from input file, store in 'cap' variable
 # If the input is taken from the camera, pass 0 instead of the video file name.
 cap = cv2.VideoCapture("D:/Videos/hand2.mp4")
-frame_counter = 0
 
 # Background subtraction function used to create background object. This code implements GMM (Gaussian Mixture Models). See OpenCV documentation for detailed info.
 # MOG2 algorithm is used here. Parameter 'history' determines how many previous frames are used to build background model.
@@ -57,7 +56,9 @@ while True:                 # while VideoCapture object is being read
     # This expression calculates the milliseconds required between frames to display at normal speed based on the frame rate of the source video.
     # In reality this will run slower than the original speed due to processing time. Use QT or lower-level APU for GUI implementation.
     key = cv2.waitKey(int((1/int(60))*1000)) & 0xFF
-    if key == 27:                     # If escape key is pressed, break.
+
+    # If escape key is pressed, break.
+    if key == 27:
         break
 
 cap.release()               # Releases capture
