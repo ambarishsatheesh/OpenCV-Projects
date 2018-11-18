@@ -3,7 +3,13 @@ import numpy as np
 
 # Create a VideoCapture object and read from input file, store in 'cap' variable
 # If the input is taken from the camera, pass 0 instead of the video file name.
-cap = cv2.VideoCapture("D:/Videos/chickens.mp4")
+cv2.namedWindow("preview")
+cap = cv2.VideoCapture(0)
+
+if cap.isOpened(): # try to get the first frame
+    rval, frame = cap.read()
+else:
+    rval = False
 
 # Background subtraction function used to create background object. This code implements GMM (Gaussian Mixture Models). See OpenCV documentation for detailed info.
 # MOG2 algorithm is used here. Parameter 'history' determines how many previous frames are used to build background model.
@@ -30,6 +36,7 @@ while True:                 # while VideoCapture object is being read
     # Returns a tuple which is unpacked into the two variables '_' (bool), and 'frame'. '_' is just to signify that the bool is being ignored.
     # Using this line multiple times causes skipping of frames, speeding up the video.
     _, frame = cap.read()
+
 
     #mask = subtractor.apply(frame)
 
